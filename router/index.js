@@ -14,7 +14,7 @@ const self = module.exports = {
                 .on('error', console.error.bind(console))
                 .on('data', body.push.bind(body))
                 .on('end', () =>
-                    routeObj.controller(Object.assign(req, { body: JSON.parse(Buffer.concat(body).toString()||'{}') }), res));
+                    routeObj.controller(Object.assign(req, { body: JSON.parse(Buffer.concat(body).toString() || '{}') }), res));
         } else {
             res.statusCode = 200;
             res.end();
