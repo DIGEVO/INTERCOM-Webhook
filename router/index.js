@@ -23,5 +23,3 @@ const self = module.exports = {
 
     routerArr: []
 };
-
-
