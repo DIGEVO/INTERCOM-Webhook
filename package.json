@@ -2,14 +2,13 @@
     "name": "intercom-webhook",
     "version": "1.0.0",
     "description": "Webhook for INTERCOM Platform",
-    "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node index.js"
     },
     "author": "Rigoberto Leander Salgado Reyes",
     "license": "",
     "engines": {
-        "node": "8.1.4"
+        "node": "8.7.0"
     },
     "dependencies": {
         "babel-runtime": "^6.23.0",
