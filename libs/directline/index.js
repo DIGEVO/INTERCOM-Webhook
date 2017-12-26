@@ -10,6 +10,7 @@ const self = module.exports = {
     watermark: null,
 
     errorHandler: (msg, error) => {
+        console.error(`1--> ${msg}: ${error.message}`);
         throw new Error(`${msg}: ${error.message}`)
     },
 
