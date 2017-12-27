@@ -6,8 +6,9 @@ require('dotenv').config();
 const directline = require('../libs/directline');
 
 const self = module.exports = {
-    processMessageFromIntercom: (req, res) => {        
+    processMessageFromIntercom: (req, res) => {
         console.log(`constroller: ${JSON.stringify(req.body)}`);
+        console.log('*******************************************************');
         directline
             .connectBot(self.createMessage(req.body))
             .then(() => { res.statusCode = 200; res.end(); })
