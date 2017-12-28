@@ -23,7 +23,7 @@ const self = module.exports = {
                 .then(r => ({
                     paused: reqBody.topic === 'conversation.admin.replied',
                     userId: reqBody.data.item.user.user_id,
-                    conversationId: r.body.custom_attributes.conversationId,
+                 //   conversationId: r.body.custom_attributes.conversationId,
                     text: reqBody.data.item.conversation_parts.conversation_parts[0].body
                 }))
                 .catch(e => console.error(e))
