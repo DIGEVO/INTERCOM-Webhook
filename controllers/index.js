@@ -9,10 +9,23 @@ const self = module.exports = {
     processMessageFromIntercom: (req, res) => {
         console.log(`constroller: ${JSON.stringify(req.body)}`);
         console.log('*******************************************************');
-        directline
-            .connectBot(self.createMessage(req.body))
-            .then(() => { res.statusCode = 200; res.end(); })
-            .catch(e => { console.error(e); res.statusCode = 200; res.end(); });
+
+        new Promise((resolve, reject) => {
+            res.statusCode = 200;
+            res.end();
+            resolve(true);
+        })
+            .then(() => directline.connectBot(self.createMessage(req.body)))
+            .catch(e => console.error(e));
+
+        // directline
+        //     .connectBot(self.createMessage(req.body))
+        //     .then(() => { res.statusCode = 200; res.end(); })
+        //     .catch(e => { console.error(e); res.statusCode = 200; res.end(); });
+        // directline
+        //     .connectBot(self.createMessage(req.body))
+        //     .then(() => { res.statusCode = 200; res.end(); })
+        //     .catch(e => { console.error(e); res.statusCode = 200; res.end(); });
     },
 
     createMessage: reqBody =>
@@ -23,7 +36,7 @@ const self = module.exports = {
                 .then(r => ({
                     paused: reqBody.topic === 'conversation.admin.replied',
                     userId: reqBody.data.item.user.user_id,
-                 //   conversationId: r.body.custom_attributes.conversationId,
+                    //   conversationId: r.body.custom_attributes.conversationId,
                     text: reqBody.data.item.conversation_parts.conversation_parts[0].body
                 }))
                 .catch(e => console.error(e))
