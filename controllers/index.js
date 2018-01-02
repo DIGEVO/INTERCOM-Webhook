@@ -16,6 +16,17 @@ const self = module.exports = {
 
         console.log(`topic: ${reqBody.topic} text: ${reqBody.data.item.conversation_parts.conversation_parts[0].body}`);
 
+        let text = null;
+
+        if (reqBody.topic === 'conversation.admin.replied') {
+            text = reqBody.data.item.conversation_parts.conversation_parts[0].body ?
+                reqBody.data.item.conversation_parts.conversation_parts[0].body
+                    .replace(/<p>/g, '')
+                    .replace(/<\/p>/g, '')
+                    .replace(/<br>/g, '\n') :
+                null
+        }
+
         return !['conversation.admin.replied', 'conversation.admin.closed'].some(s => s === reqBody.topic) ?
             Promise.resolve(undefined) :
             new Intercom.Client({ token: process.env.TOKEN }).users
@@ -23,9 +34,7 @@ const self = module.exports = {
                 .then(r => ({
                     paused: reqBody.topic === 'conversation.admin.replied',
                     userId: reqBody.data.item.user.user_id,
-                    text: reqBody.data.item.conversation_parts.conversation_parts[0].body ?
-                        reqBody.data.item.conversation_parts.conversation_parts[0].body.replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<br>/g, '\n') :
-                        null
+                    text: text
                 }))
                 .catch(e => console.error(e))
     }
