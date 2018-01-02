@@ -21,7 +21,7 @@ const self = module.exports = {
                     paused: reqBody.topic === 'conversation.admin.replied',
                     userId: reqBody.data.item.user.user_id,
                     text: reqBody.data.item.conversation_parts.conversation_parts[0].body ?
-                        reqBody.data.item.conversation_parts.conversation_parts[0].body.replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<br>/g, '0x0A') :
+                        reqBody.data.item.conversation_parts.conversation_parts[0].body.replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<br>/g, '\x5C\x6E') :
                         null
                 }))
                 .catch(e => console.error(e))
