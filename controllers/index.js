@@ -12,8 +12,11 @@ const self = module.exports = {
         directline.connectBot(self.createMessage(req.body)).catch(e => console.error(e));
     },
 
-    createMessage: reqBody =>
-        !['conversation.admin.replied', 'conversation.admin.closed'].some(s => s === reqBody.topic) ?
+    createMessage: reqBody => {
+
+        console.log(`topic: ${reqBody.topic} text: ${reqBody.data.item.conversation_parts.conversation_parts[0].body}`);
+
+        return !['conversation.admin.replied', 'conversation.admin.closed'].some(s => s === reqBody.topic) ?
             Promise.resolve(undefined) :
             new Intercom.Client({ token: process.env.TOKEN }).users
                 .find({ id: reqBody.data.item.user.id })
@@ -25,4 +28,5 @@ const self = module.exports = {
                         null
                 }))
                 .catch(e => console.error(e))
+    }
 };
