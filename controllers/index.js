@@ -20,7 +20,9 @@ const self = module.exports = {
                 .then(r => ({
                     paused: reqBody.topic === 'conversation.admin.replied',
                     userId: reqBody.data.item.user.user_id,
-                    text: reqBody.data.item.conversation_parts.conversation_parts[0].body
+                    text: reqBody.data.item.conversation_parts.conversation_parts[0].body ?
+                        reqBody.data.item.conversation_parts.conversation_parts[0].body.replace('<p>', '').replace('</p>', '').replace('<br>', '') :
+                        null
                 }))
                 .catch(e => console.error(e))
 };
