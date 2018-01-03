@@ -4,7 +4,7 @@ const Intercom = require('intercom-client');
 require('dotenv').config();
 
 const directline = require('../libs/directline');
-const Queue = require('../queue');
+const Queue = require('../libs/queue');
 
 const self = module.exports = {
     queue: new Queue(),
