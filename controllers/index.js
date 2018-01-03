@@ -45,7 +45,7 @@ const self = module.exports = {
         //
         const partType = reqBody.data.item.conversation_parts.conversation_parts[0].part_type;
         if (reqBody.topic === 'conversation.admin.replied' && partType === 'comment') {
-            const text = text = reqBody.data.item.conversation_parts.conversation_parts[0].body ?
+            const text = reqBody.data.item.conversation_parts.conversation_parts[0].body ?
                 reqBody.data.item.conversation_parts.conversation_parts[0].body
                     .replace(/<p>/g, '')
                     .replace(/<\/p>/g, '')
@@ -63,7 +63,7 @@ const self = module.exports = {
         }
 
         if (reqBody.topic === 'conversation.admin.closed') {
-            const text = text = reqBody.data.item.conversation_parts.conversation_parts[0].body ?
+            const text = reqBody.data.item.conversation_parts.conversation_parts[0].body ?
                 reqBody.data.item.conversation_parts.conversation_parts[0].body
                     .replace(/<p>/g, '')
                     .replace(/<\/p>/g, '')
