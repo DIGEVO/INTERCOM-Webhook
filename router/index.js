@@ -15,6 +15,7 @@ const self = module.exports = {
                 .on('data', body.push.bind(body))
                 .on('end', () => {
                     console.log(Buffer.concat(body).toString() || '{}');
+                    console.log('----------------------------------------------');
 
                     return routeObj.controller(Object.assign(req, { body: JSON.parse(Buffer.concat(body).toString() || '{}') }), res);
                 });
