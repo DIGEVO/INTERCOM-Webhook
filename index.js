@@ -12,6 +12,9 @@ router.subscribe('GET', '/.*', (req, res) => {
 });
 
 const server = http.createServer();
-server.on('request', router.route);
+server.on('request', (req, res) => {
+    console.log(req);
+    router.route(req,res);
+});
 server.listen(process.env.PORT || 1338);
 

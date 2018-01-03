@@ -11,7 +11,7 @@ const self = module.exports = {
 
     processMessageFromIntercom: (req, res) => {
 
-        console.log(`topic: ${req.body.topic} text: ${req.body.data.item.conversation_parts.conversation_parts[0].body}`);
+      //  console.log(`topic: ${req.body.topic} text: ${req.body.data.item.conversation_parts.conversation_parts[0].body}`);
 
         res.statusCode = 200;
         res.end();
@@ -19,8 +19,6 @@ const self = module.exports = {
     },
 
     createMessage: reqBody => {
-
-        // console.log(`topic: ${reqBody.topic} text: ${reqBody.data.item.conversation_parts.conversation_parts[0].body}`);
 
         let text = null;
 
