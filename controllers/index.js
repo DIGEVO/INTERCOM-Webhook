@@ -15,7 +15,7 @@ const self = module.exports = {
 
         res.statusCode = 200;
         res.end();
-        self.queue.add(() => directline.connectBot(self.createMessage(req.body)).catch(e => console.error(e)));
+        directline.connectBot(self.createMessage(req.body)).catch(e => console.error(e));
     },
 
     createMessage: reqBody => {
