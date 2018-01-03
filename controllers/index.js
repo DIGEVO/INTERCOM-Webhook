@@ -10,6 +10,9 @@ const self = module.exports = {
     queue: new Queue(),
 
     processMessageFromIntercom: (req, res) => {
+
+        console.log(`topic: ${req.body.topic} text: ${req.body.data.item.conversation_parts.conversation_parts[0].body}`);
+
         res.statusCode = 200;
         res.end();
         self.queue.add(() => directline.connectBot(self.createMessage(req.body)).catch(e => console.error(e)));
@@ -17,7 +20,7 @@ const self = module.exports = {
 
     createMessage: reqBody => {
 
-        console.log(`topic: ${reqBody.topic} text: ${reqBody.data.item.conversation_parts.conversation_parts[0].body}`);
+        // console.log(`topic: ${reqBody.topic} text: ${reqBody.data.item.conversation_parts.conversation_parts[0].body}`);
 
         let text = null;
 
