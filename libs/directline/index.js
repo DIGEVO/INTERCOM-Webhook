@@ -78,9 +78,11 @@ const self = module.exports = {
 
         return self.retry(operation, test)
             .then(res => {
-                const status = res.obj.activities
-                    .filter(m => m.from.id !== process.env.CLIENT)
-                    .reduce((acc, a) => acc.concat(self.getActivityText(a)), '');
+                const status = test(res) ?
+                    res.obj.activities
+                        .filter(m => m.from.id !== process.env.CLIENT)
+                        .reduce((acc, a) => acc.concat(self.getActivityText(a)), '') :
+                    'fall attempt!';
 
                 console.log(status);
 
@@ -101,9 +103,9 @@ const self = module.exports = {
                 .catch(e => console.error(e))
     ,
 
-    retry: (operation, test, delay = 1000) => {
+    retry: (operation, test, delay = 1000, attempts = 10) => {
         return operation()
-            .then(res => !test(res) ? Q.delay(delay).then(self.retry.bind(null, operation, test, delay)) : res)
+            .then(res => !test(res) && attempts ? Q.delay(delay).then(self.retry.bind(null, operation, test, delay, attempts - 1)) : res)
             .catch(error => self.errorHandler('Error getting response from bot', error));
     }
 };
