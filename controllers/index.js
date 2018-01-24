@@ -4,11 +4,8 @@ const Intercom = require('intercom-client');
 require('dotenv').config();
 
 const directline = require('../libs/directline');
-const Queue = require('../libs/queue');
 
 const self = module.exports = {
-    queue: new Queue(),
-
     processMessageFromIntercom: (req, res) => {
         res.statusCode = 200;
         res.end();
