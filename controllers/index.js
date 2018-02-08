@@ -14,7 +14,10 @@ const self = module.exports = {
 
     createMessage: reqBody => {
         const partType = reqBody.data.item.conversation_parts.conversation_parts[0].part_type;
-       
+	   
+		console.log(JSON.stringify(reqBody.data));
+		console.log('---------------------------------------------------------');
+
         if ((reqBody.topic === 'conversation.admin.replied' && partType === 'comment') || reqBody.topic === 'conversation.admin.closed') {
             const text = reqBody.data.item.conversation_parts.conversation_parts[0].body ?
                 reqBody.data.item.conversation_parts.conversation_parts[0].body
