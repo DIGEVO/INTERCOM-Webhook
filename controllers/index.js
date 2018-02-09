@@ -25,8 +25,15 @@ const self = module.exports = {
 				.replace(/<br>/g, '\n') :
 				null;
 
-			return new Intercom.Client({token: process.env.TOKEN}).users
-				.find({id: reqBody.data.item.user.id})
+			console.log(JSON.stringify(reqBody));
+			console.log('----------------------------------------------------------');
+
+			return new Intercom.Client({
+					token: process.env.TOKEN
+				}).users
+				.find({
+					id: reqBody.data.item.user.id
+				})
 				.then(r => ({
 					paused: reqBody.topic === 'conversation.admin.replied',
 					userId: reqBody.data.item.user.user_id,
@@ -34,6 +41,8 @@ const self = module.exports = {
 				}))
 				.catch(e => console.error(e));
 		}
+		console.log(JSON.stringify(reqBody));
+		console.log('**********************************************************');
 
 		return Promise.resolve(undefined);
 	}
