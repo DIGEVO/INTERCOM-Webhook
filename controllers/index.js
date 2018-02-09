@@ -41,8 +41,8 @@ const self = module.exports = {
 				}))
 				.catch(e => console.error(e));
 		}
-		console.log(JSON.stringify(reqBody));
-		console.log('**********************************************************');
+		// console.log(JSON.stringify(reqBody));
+		// console.log('**********************************************************');
 
 		return Promise.resolve(undefined);
 	}
