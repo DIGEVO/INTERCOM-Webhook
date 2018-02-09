@@ -16,9 +16,6 @@ const self = module.exports = {
 		const partType = reqBody.data.item.conversation_parts.conversation_parts[0].part_type;
 		const botAdminId = reqBody.data.item.conversation_parts.conversation_parts[0].author.id;
 
-		console.log(JSON.stringify(reqBody));
-		console.log('---------------------------------------------------------');
-
 		if ((reqBody.topic === 'conversation.admin.replied' && partType === 'comment' && botAdminId !== process.env.INTERCOM_BOT_ADMIN_ID) ||
 			reqBody.topic === 'conversation.admin.closed') {
 			const text = reqBody.data.item.conversation_parts.conversation_parts[0].body ?
