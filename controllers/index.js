@@ -40,9 +40,10 @@ const self = module.exports = {
 					text: text
 				}))
 				.catch(e => console.error(e));
+		} else {
+			console.log(JSON.stringify(reqBody));
+			console.log('**********************************************************');
 		}
-		// console.log(JSON.stringify(reqBody));
-		// console.log('**********************************************************');
 
 		return Promise.resolve(undefined);
 	}
